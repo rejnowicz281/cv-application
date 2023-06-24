@@ -1,4 +1,5 @@
 import { Component } from "react";
+import Cv from "../Cv";
 
 export default class App extends Component {
     constructor(props) {
@@ -7,8 +8,8 @@ export default class App extends Component {
 
     render() {
         return (
-            <div className="App">
-                <h1>CV Application</h1>
+            <div className="App container p-5">
+                <Cv />
             </div>
         );
     }
