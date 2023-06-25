@@ -13,5 +13,6 @@ input.EditableInput {
 
 .EditableInput:hover,
 input.EditableInput {
+    font-size: 1.1em;
     font-weight: bold;
 }
