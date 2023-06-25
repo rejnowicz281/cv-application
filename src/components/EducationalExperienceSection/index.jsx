@@ -12,6 +12,11 @@ export default class EducationalExperienceSection extends FormSection {
             adding: false,
             newEntry: { schoolName: "", titleOfStudy: "", dateOfStudy: "" },
         };
+
+        this.setSchoolName = this.setSchoolName.bind(this);
+        this.setTitleOfStudy = this.setTitleOfStudy.bind(this);
+        this.setDateOfStudy = this.setDateOfStudy.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     setSchoolName(value) {
