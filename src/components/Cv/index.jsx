@@ -1,5 +1,5 @@
 import { Component } from "react";
-import EditableInput from "../EditableInput";
+import GeneralInfoSection from "../GeneralInfoSection";
 
 export default class Cv extends Component {
     constructor(props) {
@@ -61,37 +61,13 @@ export default class Cv extends Component {
     render() {
         return (
             <div className="Cv">
-                <section className="general-info">
-                    <EditableInput
-                        onChange={this.setFirstName}
-                        id="first-name"
-                        type="text"
-                        value={this.state.generalInfo.firstName}
-                        placeholder="First Name"
-                    />
-                    <EditableInput
-                        onChange={this.setLastName}
-                        id="last-name"
-                        type="text"
-                        value={this.state.generalInfo.lastName}
-                        placeholder="Last Name"
-                    />
-
-                    <EditableInput
-                        onChange={this.setEmail}
-                        id="email"
-                        type="email"
-                        value={this.state.generalInfo.email}
-                        placeholder="Email"
-                    />
-                    <EditableInput
-                        onChange={this.setPhone}
-                        id="phone"
-                        type="tel"
-                        value={this.state.generalInfo.phone}
-                        placeholder="Phone"
-                    />
-                </section>
+                <GeneralInfoSection
+                    generalInfo={this.state.generalInfo}
+                    setFirstName={this.setFirstName}
+                    setLastName={this.setLastName}
+                    setEmail={this.setEmail}
+                    setPhone={this.setPhone}
+                />
                 <hr />
                 <section className="educational-experience">
                     <h1>Educational experience</h1>
