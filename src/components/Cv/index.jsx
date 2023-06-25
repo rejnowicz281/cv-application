@@ -1,4 +1,5 @@
 import { Component } from "react";
+import EducationalExperienceSection from "../EducationalExperienceSection";
 import GeneralInfoSection from "../GeneralInfoSection";
 
 export default class Cv extends Component {
@@ -20,6 +21,7 @@ export default class Cv extends Component {
         this.setLastName = this.setLastName.bind(this);
         this.setEmail = this.setEmail.bind(this);
         this.setPhone = this.setPhone.bind(this);
+        this.addEducationalExperience = this.addEducationalExperience.bind(this);
     }
 
     setFirstName(value) {
@@ -58,6 +60,12 @@ export default class Cv extends Component {
         });
     }
 
+    addEducationalExperience(educationalExperience) {
+        this.setState({
+            educationalExperience: [...this.state.educationalExperience, educationalExperience],
+        });
+    }
+
     render() {
         return (
             <div className="Cv">
@@ -69,11 +77,10 @@ export default class Cv extends Component {
                     setPhone={this.setPhone}
                 />
                 <hr />
-                <section className="educational-experience">
-                    <h1>Educational experience</h1>
-                    <button className="btn btn-primary">Add</button>
-                    {/* School name, title of study, date of study */}
-                </section>
+                <EducationalExperienceSection
+                    educationalExperience={this.state.educationalExperience}
+                    onSubmit={this.addEducationalExperience}
+                />
                 <hr />
                 <section className="practical-experience">
                     <h1>Practical experience</h1>
