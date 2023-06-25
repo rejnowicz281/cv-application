@@ -2,6 +2,7 @@ import { Component } from "react";
 import EducationalExperienceSection from "../EducationalExperienceSection";
 import GeneralInfoSection from "../GeneralInfoSection";
 import PracticalExperienceSection from "../PracticalExperienceSection";
+import SkillsSection from "../SkillsSection";
 
 import "./index.css";
 
@@ -18,6 +19,7 @@ export default class Cv extends Component {
             },
             educationalExperience: [],
             practicalExperience: [],
+            skills: [],
         };
 
         this.setFirstName = this.setFirstName.bind(this);
@@ -26,6 +28,7 @@ export default class Cv extends Component {
         this.setPhone = this.setPhone.bind(this);
         this.addEducationalExperience = this.addEducationalExperience.bind(this);
         this.addPracticalExperience = this.addPracticalExperience.bind(this);
+        this.addSkill = this.addSkill.bind(this);
     }
 
     setFirstName(value) {
@@ -76,6 +79,12 @@ export default class Cv extends Component {
         });
     }
 
+    addSkill(skill) {
+        this.setState({
+            skills: [...this.state.skills, skill],
+        });
+    }
+
     render() {
         return (
             <div className="Cv vh-100 d-flex">
@@ -100,6 +109,9 @@ export default class Cv extends Component {
                             practicalExperience={this.state.practicalExperience}
                             onSubmit={this.addPracticalExperience}
                         />
+                    </div>
+                    <div className="flex-fill">
+                        <SkillsSection skills={this.state.skills} onSubmit={this.addSkill} />
                     </div>
                 </main>
             </div>
