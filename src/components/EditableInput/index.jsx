@@ -10,7 +10,6 @@ export default class EditableInput extends Component {
         super(props);
 
         this.state = {
-            value: this.props.value,
             editing: false,
         };
     }
@@ -23,21 +22,26 @@ export default class EditableInput extends Component {
                 });
             }
         });
+
+        window.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                this.setState({
+                    editing: false,
+                });
+            }
+        });
     }
 
     render() {
         if (this.state.editing) {
             return (
                 <input
-                    onChange={(e) =>
-                        this.setState({
-                            value: e.target.value,
-                        })
-                    }
+                    onChange={(e) => this.props.onChange(e.target.value)}
                     type={this.props.type}
                     className="EditableInput"
                     id={this.props.id}
-                    value={this.state.value}
+                    value={this.props.value}
+                    placeholder={this.props.placeholder}
                 />
             );
         } else {
@@ -51,7 +55,7 @@ export default class EditableInput extends Component {
                     className="EditableInput"
                     id={this.props.id}
                 >
-                    {this.state.value}
+                    {this.props.value == "" ? this.props.placeholder : this.props.value}
                 </div>
             );
         }
@@ -62,4 +66,6 @@ EditableInput.propTypes = {
     value: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    placeholder: PropTypes.string,
 };
