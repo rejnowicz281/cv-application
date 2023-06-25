@@ -92,11 +92,13 @@ export default class Cv extends Component {
                         placeholder="Phone"
                     />
                 </section>
+                <hr />
                 <section className="educational-experience">
                     <h1>Educational experience</h1>
                     <button className="btn btn-primary">Add</button>
                     {/* School name, title of study, date of study */}
                 </section>
+                <hr />
                 <section className="practical-experience">
                     <h1>Practical experience</h1>
                     <button className="btn btn-primary">Add</button>
