@@ -1,0 +1,7 @@
+.Cv > aside {
+    flex: 1;
+}
+
+.Cv > main {
+    flex: 4.5;
+}

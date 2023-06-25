@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { Component } from "react";
 import EditableInput from "../EditableInput";
+import "./index.css";
 
 export default class GeneralInfoSection extends Component {
     constructor(props) {
@@ -24,21 +25,23 @@ export default class GeneralInfoSection extends Component {
                     value={this.props.generalInfo.lastName}
                     placeholder="Last Name"
                 />
-
-                <EditableInput
-                    onChange={this.props.setEmail}
-                    id="email"
-                    type="email"
-                    value={this.props.generalInfo.email}
-                    placeholder="Email"
-                />
-                <EditableInput
-                    onChange={this.props.setPhone}
-                    id="phone"
-                    type="tel"
-                    value={this.props.generalInfo.phone}
-                    placeholder="Phone"
-                />
+                <p className="fs-4 mt-5 pb-1 border-bottom">Contact</p>
+                <div className="contact">
+                    <EditableInput
+                        onChange={this.props.setEmail}
+                        id="email"
+                        type="email"
+                        value={this.props.generalInfo.email}
+                        placeholder="Email"
+                    />
+                    <EditableInput
+                        onChange={this.props.setPhone}
+                        id="phone"
+                        type="tel"
+                        value={this.props.generalInfo.phone}
+                        placeholder="Phone"
+                    />
+                </div>
             </section>
         );
     }

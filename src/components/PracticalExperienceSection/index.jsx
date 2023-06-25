@@ -1,14 +1,15 @@
 import PropTypes from "prop-types";
-import FormSection from "../FormSection";
+import { Component } from "react";
+import ToggableForm from "../ToggableForm";
+
 {
     /* Company name, position title, main tasks, date (from-to) of working */
 }
-export default class PracticalExperienceSection extends FormSection {
+export default class PracticalExperienceSection extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            adding: false,
             newEntry: { companyName: "", positionTitle: "", mainTasks: "", dateFrom: "", dateTo: "" },
         };
 
@@ -68,7 +69,6 @@ export default class PracticalExperienceSection extends FormSection {
     onSubmit() {
         this.props.onSubmit(this.state.newEntry);
         this.setState({
-            adding: false,
             newEntry: { companyName: "", positionTitle: "", mainTasks: "", dateFrom: "", dateTo: "" },
         });
     }
@@ -76,7 +76,7 @@ export default class PracticalExperienceSection extends FormSection {
     render() {
         return (
             <section className="PracticalExperienceSection">
-                {this.header("Practical Experience")}
+                <h1>Practical Experience</h1>
                 <ul>
                     {this.props.practicalExperience.map((exp, idx) => {
                         return (
@@ -87,38 +87,54 @@ export default class PracticalExperienceSection extends FormSection {
                         );
                     })}
                 </ul>
-                {this.form([
-                    {
-                        type: "text",
-                        placeholder: "Company name",
-                        value: this.state.newEntry.companyName,
-                        onChange: (value) => this.setCompanyName(value),
-                    },
-                    {
-                        type: "text",
-                        placeholder: "Position title",
-                        value: this.state.newEntry.positionTitle,
-                        onChange: (value) => this.setPositionTitle(value),
-                    },
-                    {
-                        type: "text",
-                        placeholder: "Main tasks",
-                        value: this.state.newEntry.mainTasks,
-                        onChange: (value) => this.setMainTasks(value),
-                    },
-                    {
-                        type: "date",
-                        placeholder: "Date from",
-                        value: this.state.newEntry.dateFrom,
-                        onChange: (value) => this.setDateFrom(value),
-                    },
-                    {
-                        type: "date",
-                        placeholder: "Date to",
-                        value: this.state.newEntry.dateTo,
-                        onChange: (value) => this.setDateTo(value),
-                    },
-                ])}
+                <ToggableForm classList="d-flex align-items-end gap-4" onSubmit={this.onSubmit}>
+                    <div className="d-flex gap-1">
+                        <div className="d-flex flex-column">
+                            Company Name
+                            <input
+                                type="text"
+                                value={this.state.newEntry.companyName}
+                                onChange={(e) => this.setCompanyName(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="d-flex flex-column">
+                            Position Title
+                            <input
+                                type="text"
+                                value={this.state.newEntry.positionTitle}
+                                onChange={(e) => this.setPositionTitle(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="d-flex flex-column">
+                            Main Tasks
+                            <input
+                                type="text"
+                                value={this.state.newEntry.mainTasks}
+                                onChange={(e) => this.setMainTasks(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="d-flex flex-column">
+                            Date From
+                            <input
+                                type="date"
+                                value={this.state.newEntry.dateFrom}
+                                onChange={(e) => this.setDateFrom(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="d-flex flex-column">
+                            Date To
+                            <input
+                                type="date"
+                                value={this.state.newEntry.dateTo}
+                                onChange={(e) => this.setDateTo(e.target.value)}
+                            />
+                        </div>
+                    </div>
+                </ToggableForm>
             </section>
         );
     }

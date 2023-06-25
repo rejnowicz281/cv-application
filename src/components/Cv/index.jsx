@@ -3,6 +3,8 @@ import EducationalExperienceSection from "../EducationalExperienceSection";
 import GeneralInfoSection from "../GeneralInfoSection";
 import PracticalExperienceSection from "../PracticalExperienceSection";
 
+import "./index.css";
+
 export default class Cv extends Component {
     constructor(props) {
         super(props);
@@ -76,24 +78,30 @@ export default class Cv extends Component {
 
     render() {
         return (
-            <div className="Cv">
-                <GeneralInfoSection
-                    generalInfo={this.state.generalInfo}
-                    setFirstName={this.setFirstName}
-                    setLastName={this.setLastName}
-                    setEmail={this.setEmail}
-                    setPhone={this.setPhone}
-                />
-                <hr />
-                <EducationalExperienceSection
-                    educationalExperience={this.state.educationalExperience}
-                    onSubmit={this.addEducationalExperience}
-                />
-                <hr />
-                <PracticalExperienceSection
-                    practicalExperience={this.state.practicalExperience}
-                    onSubmit={this.addPracticalExperience}
-                />
+            <div className="Cv vh-100 d-flex">
+                <aside className="bg-dark text-white p-5">
+                    <GeneralInfoSection
+                        generalInfo={this.state.generalInfo}
+                        setFirstName={this.setFirstName}
+                        setLastName={this.setLastName}
+                        setEmail={this.setEmail}
+                        setPhone={this.setPhone}
+                    />
+                </aside>
+                <main className="bg-light d-flex flex-column p-5">
+                    <div className="flex-fill">
+                        <EducationalExperienceSection
+                            educationalExperience={this.state.educationalExperience}
+                            onSubmit={this.addEducationalExperience}
+                        />
+                    </div>
+                    <div className="flex-fill">
+                        <PracticalExperienceSection
+                            practicalExperience={this.state.practicalExperience}
+                            onSubmit={this.addPracticalExperience}
+                        />
+                    </div>
+                </main>
             </div>
         );
     }

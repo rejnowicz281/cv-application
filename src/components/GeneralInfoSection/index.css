@@ -1,0 +1,10 @@
+.contact * {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.phone {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}

@@ -8,7 +8,7 @@ export default class App extends Component {
 
     render() {
         return (
-            <div className="App container p-5">
+            <div className="App">
                 <Cv />
             </div>
         );
