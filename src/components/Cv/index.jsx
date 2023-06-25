@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Component } from "react";
 import EducationalExperienceSection from "../EducationalExperienceSection";
 import GeneralInfoSection from "../GeneralInfoSection";
@@ -88,7 +89,7 @@ export default class Cv extends Component {
     render() {
         return (
             <div className="Cv vh-100 d-flex">
-                <aside className="bg-dark text-white p-5">
+                <aside className="bg-dark text-white p-5 d-flex flex-column justify-content-between">
                     <GeneralInfoSection
                         generalInfo={this.state.generalInfo}
                         setFirstName={this.setFirstName}
@@ -96,6 +97,9 @@ export default class Cv extends Component {
                         setEmail={this.setEmail}
                         setPhone={this.setPhone}
                     />
+                    <button onClick={() => this.props.saveCV(this.state)} className="btn btn-success p-3">
+                        Save
+                    </button>
                 </aside>
                 <main className="bg-light d-flex flex-column p-5">
                     <div className="flex-fill">
@@ -118,3 +122,7 @@ export default class Cv extends Component {
         );
     }
 }
+
+Cv.propTypes = {
+    saveCV: PropTypes.func.isRequired,
+};
