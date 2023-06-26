@@ -68,7 +68,10 @@ export default function Cv(props) {
                     setEmail={setEmail}
                     setPhone={setPhone}
                 />
-                <button onClick={() => props.saveCV(this.state)} className="btn btn-success p-3">
+                <button
+                    onClick={() => props.saveCV({ generalInfo, practicalExperience, educationalExperience, skills })}
+                    className="btn btn-success p-3"
+                >
                     Save
                 </button>
             </aside>
