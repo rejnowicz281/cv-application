@@ -1,50 +1,43 @@
 import PropTypes from "prop-types";
-import { Component } from "react";
 import EditableInput from "../EditableInput";
 import "./index.css";
 
-export default class GeneralInfoSection extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <section className="GeneralInfoSection">
+export default function GeneralInfoSection(props) {
+    return (
+        <section className="GeneralInfoSection">
+            <EditableInput
+                onChange={props.setFirstName}
+                id="first-name"
+                type="text"
+                value={props.generalInfo.firstName}
+                placeholder="First Name"
+            />
+            <EditableInput
+                onChange={props.setLastName}
+                id="last-name"
+                type="text"
+                value={props.generalInfo.lastName}
+                placeholder="Last Name"
+            />
+            <p className="fs-4 mt-5 pb-1 border-bottom">Contact</p>
+            <div className="contact">
                 <EditableInput
-                    onChange={this.props.setFirstName}
-                    id="first-name"
-                    type="text"
-                    value={this.props.generalInfo.firstName}
-                    placeholder="First Name"
+                    onChange={props.setEmail}
+                    id="email"
+                    type="email"
+                    value={props.generalInfo.email}
+                    placeholder="Email"
                 />
                 <EditableInput
-                    onChange={this.props.setLastName}
-                    id="last-name"
-                    type="text"
-                    value={this.props.generalInfo.lastName}
-                    placeholder="Last Name"
+                    onChange={props.setPhone}
+                    id="phone"
+                    type="tel"
+                    value={props.generalInfo.phone}
+                    placeholder="Phone"
                 />
-                <p className="fs-4 mt-5 pb-1 border-bottom">Contact</p>
-                <div className="contact">
-                    <EditableInput
-                        onChange={this.props.setEmail}
-                        id="email"
-                        type="email"
-                        value={this.props.generalInfo.email}
-                        placeholder="Email"
-                    />
-                    <EditableInput
-                        onChange={this.props.setPhone}
-                        id="phone"
-                        type="tel"
-                        value={this.props.generalInfo.phone}
-                        placeholder="Phone"
-                    />
-                </div>
-            </section>
-        );
-    }
+            </div>
+        </section>
+    );
 }
 
 GeneralInfoSection.propTypes = {

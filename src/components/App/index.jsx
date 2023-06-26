@@ -1,29 +1,16 @@
-import { Component } from "react";
+import { useState } from "react";
 import Cv from "../Cv";
 
-export default class App extends Component {
-    constructor(props) {
-        super(props);
+export default function App() {
+    const [cvList, setCvList] = useState([]);
 
-        this.state = {
-            showCVList: false,
-            cvList: [],
-        };
-
-        this.saveCV = this.saveCV.bind(this);
+    function saveCV(cv) {
+        setCvList([...cvList, cv]);
     }
 
-    saveCV(cv) {
-        this.setState({
-            cvList: [...this.state.cvList, cv],
-        });
-    }
-
-    render() {
-        return (
-            <div className="App">
-                <Cv saveCV={this.saveCV} />
-            </div>
-        );
-    }
+    return (
+        <div className="App">
+            <Cv saveCV={saveCV} />
+        </div>
+    );
 }

@@ -1,107 +1,88 @@
 import PropTypes from "prop-types";
-import { Component } from "react";
+import { useState } from "react";
 import ToggableForm from "../ToggableForm";
 
 {
     /* School name, title of study, date of study */
 }
-export default class EducationalExperienceSection extends Component {
-    constructor(props) {
-        super(props);
+export default function EducationalExperienceSection(props) {
+    const [newEntry, setNewEntry] = useState({ schoolName: "", titleOfStudy: "", dateOfStudy: "" });
 
-        this.state = {
-            newEntry: { schoolName: "", titleOfStudy: "", dateOfStudy: "" },
-        };
-
-        this.setSchoolName = this.setSchoolName.bind(this);
-        this.setTitleOfStudy = this.setTitleOfStudy.bind(this);
-        this.setDateOfStudy = this.setDateOfStudy.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-    }
-
-    setSchoolName(value) {
-        this.setState({
-            newEntry: {
-                ...this.state.newEntry,
-                schoolName: value,
-            },
+    function setSchoolName(value) {
+        setNewEntry({
+            ...newEntry,
+            schoolName: value,
         });
     }
 
-    setTitleOfStudy(value) {
-        this.setState({
-            newEntry: {
-                ...this.state.newEntry,
-                titleOfStudy: value,
-            },
+    function setTitleOfStudy(value) {
+        setNewEntry({
+            ...newEntry,
+            titleOfStudy: value,
         });
     }
 
-    setDateOfStudy(value) {
-        this.setState({
-            newEntry: {
-                ...this.state.newEntry,
-                dateOfStudy: value,
-            },
+    function setDateOfStudy(value) {
+        setNewEntry({
+            ...newEntry,
+            dateOfStudy: value,
         });
     }
 
-    onSubmit() {
-        this.props.onSubmit(this.state.newEntry);
-        this.setState({ adding: false, newEntry: { schoolName: "", titleOfStudy: "", dateOfStudy: "" } });
+    function onSubmit() {
+        props.addEducationalExperience(newEntry);
+        setNewEntry({ schoolName: "", titleOfStudy: "", dateOfStudy: "" });
     }
 
-    render() {
-        return (
-            <section className="EducationalExperienceSection">
-                <h1>Educational Experience</h1>
-                <ul>
-                    {this.props.educationalExperience.map((exp, idx) => {
-                        return (
-                            <li key={idx}>
-                                {exp.schoolName} - {exp.titleOfStudy} - {exp.dateOfStudy}
-                            </li>
-                        );
-                    })}
-                </ul>
-                <ToggableForm classList="d-flex align-items-end gap-4" onSubmit={this.onSubmit}>
-                    <div className="d-flex gap-1">
-                        <div className="d-flex flex-column">
-                            School Name
-                            <input
-                                type="text"
-                                value={this.state.newEntry.schoolName}
-                                onChange={(e) => this.setSchoolName(e.target.value)}
-                                required
-                            />
-                        </div>
-                        <div className="d-flex flex-column">
-                            Title of Study
-                            <input
-                                type="text"
-                                value={this.state.newEntry.titleOfStudy}
-                                onChange={(e) => this.setTitleOfStudy(e.target.value)}
-                                required
-                            />
-                        </div>
-                        <div className="d-flex flex-column">
-                            Date Of Study
-                            <input
-                                type="date"
-                                value={this.state.newEntry.dateOfStudy}
-                                onChange={(e) => this.setDateOfStudy(e.target.value)}
-                                required
-                            />
-                        </div>
+    return (
+        <section className="EducationalExperienceSection">
+            <h1>Educational Experience</h1>
+            <ul>
+                {props.educationalExperience.map((exp, idx) => {
+                    return (
+                        <li key={idx}>
+                            {exp.schoolName} - {exp.titleOfStudy} - {exp.dateOfStudy}
+                        </li>
+                    );
+                })}
+            </ul>
+            <ToggableForm classList="d-flex align-items-end gap-4" onSubmit={onSubmit}>
+                <div className="d-flex gap-1">
+                    <div className="d-flex flex-column">
+                        School Name
+                        <input
+                            type="text"
+                            value={newEntry.schoolName}
+                            onChange={(e) => setSchoolName(e.target.value)}
+                            required
+                        />
                     </div>
-                </ToggableForm>
-            </section>
-        );
-    }
+                    <div className="d-flex flex-column">
+                        Title of Study
+                        <input
+                            type="text"
+                            value={newEntry.titleOfStudy}
+                            onChange={(e) => setTitleOfStudy(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className="d-flex flex-column">
+                        Date Of Study
+                        <input
+                            type="date"
+                            value={newEntry.dateOfStudy}
+                            onChange={(e) => setDateOfStudy(e.target.value)}
+                            required
+                        />
+                    </div>
+                </div>
+            </ToggableForm>
+        </section>
+    );
 }
 
 EducationalExperienceSection.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
+    addEducationalExperience: PropTypes.func.isRequired,
     educationalExperience: PropTypes.arrayOf(
         PropTypes.shape({
             schoolName: PropTypes.string.isRequired,

@@ -1,50 +1,31 @@
 import PropTypes from "prop-types";
-import { Component } from "react";
+import { useState } from "react";
 import ToggableForm from "../ToggableForm";
 
-export default class SkillsSection extends Component {
-    constructor(props) {
-        super(props);
+export default function SkillsSection(props) {
+    const [newEntry, setNewEntry] = useState("");
 
-        this.state = {
-            newEntry: "",
-        };
-
-        this.setNewEntry = this.setNewEntry.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+    function onSubmit() {
+        props.addSkill(newEntry);
+        setNewEntry("");
     }
 
-    setNewEntry(value) {
-        this.setState({
-            newEntry: value,
-        });
-    }
-
-    onSubmit() {
-        this.props.onSubmit(this.state.newEntry);
-        this.setState({
-            newEntry: "",
-        });
-    }
-
-    render() {
-        return (
-            <section className="SkillsSection">
-                <h1>Skills</h1>
-                <ul>
-                    {this.props.skills.map((skill, idx) => {
-                        return <li key={idx}>{skill}</li>;
-                    })}
-                </ul>
-                <ToggableForm classList="d-flex align-items-end gap-4" onSubmit={this.onSubmit}>
-                    <input type="text" onChange={(e) => this.setNewEntry(e.target.value)} value={this.state.newEntry} />
-                </ToggableForm>
-            </section>
-        );
-    }
+    return (
+        <section className="SkillsSection">
+            <h1>Skills</h1>
+            <ul>
+                {props.skills.map((skill, idx) => {
+                    return <li key={idx}>{skill}</li>;
+                })}
+            </ul>
+            <ToggableForm classList="d-flex align-items-end gap-4" onSubmit={onSubmit}>
+                <input type="text" onChange={(e) => setNewEntry(e.target.value)} value={newEntry} />
+            </ToggableForm>
+        </section>
+    );
 }
 
 SkillsSection.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
+    addSkill: PropTypes.func.isRequired,
     skills: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

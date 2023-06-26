@@ -1,64 +1,52 @@
 import PropTypes from "prop-types";
-import { Component } from "react";
+import { useEffect, useState } from "react";
 import "./index.css";
 
 {
     /* ✔ ❌ */
 }
-export default class EditableInput extends Component {
-    constructor(props) {
-        super(props);
+export default function EditableInput(props) {
+    const [editing, setEditing] = useState(false);
 
-        this.state = {
-            editing: false,
+    useEffect(() => {
+        const disableEditingOnClick = (e) => {
+            if (e.target.id !== props.id) {
+                setEditing(false);
+            }
         };
-    }
 
-    componentDidMount() {
-        window.addEventListener("click", (e) => {
-            if (e.target.id !== this.props.id) {
-                this.setState({
-                    editing: false,
-                });
-            }
-        });
-
-        window.addEventListener("keydown", (e) => {
+        const disableEditingOnEnter = (e) => {
             if (e.key === "Enter") {
-                this.setState({
-                    editing: false,
-                });
+                setEditing(false);
             }
-        });
-    }
+        };
 
-    render() {
-        if (this.state.editing) {
-            return (
-                <input
-                    onChange={(e) => this.props.onChange(e.target.value)}
-                    type={this.props.type}
-                    className="EditableInput"
-                    id={this.props.id}
-                    value={this.props.value}
-                    placeholder={this.props.placeholder}
-                />
-            );
-        } else {
-            return (
-                <div
-                    onClick={() => {
-                        this.setState({
-                            editing: true,
-                        });
-                    }}
-                    className="EditableInput"
-                    id={this.props.id}
-                >
-                    {this.props.value == "" ? this.props.placeholder : this.props.value}
-                </div>
-            );
-        }
+        document.addEventListener("click", disableEditingOnClick);
+        document.addEventListener("keydown", disableEditingOnEnter);
+
+        return () => {
+            document.removeEventListener("click", disableEditingOnClick);
+            document.removeEventListener("keydown", disableEditingOnEnter);
+        };
+    }, [props.id]);
+
+    if (editing) {
+        return (
+            <input
+                onChange={(e) => props.onChange(e.target.value)}
+                type={props.type}
+                className="EditableInput"
+                id={props.id}
+                value={props.value}
+                placeholder={props.placeholder}
+            />
+        );
+    } else {
+        return (
+            <div onClick={() => setEditing(true)} className="EditableInput" id={props.id}>
+                {props.value == "" ? props.placeholder : props.value}
+            </div>
+        );
     }
 }
 

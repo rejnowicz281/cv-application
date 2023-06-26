@@ -1,47 +1,35 @@
 import PropTypes from "prop-types";
-import { Component } from "react";
+import { useState } from "react";
 
-export default class ToggableForm extends Component {
-    constructor(props) {
-        super(props);
+export default function ToggableForm(props) {
+    const [adding, setAdding] = useState(false);
 
-        this.state = {
-            adding: false,
-        };
-    }
-
-    onSubmit(e) {
+    function onSubmit(e) {
         e.preventDefault();
-        this.setState({ adding: false });
-        this.props.onSubmit();
+        setAdding(false);
+        props.onSubmit();
     }
 
-    render() {
-        if (this.state.adding) {
-            return (
-                <form onSubmit={(e) => this.onSubmit(e)} className={this.props.classList ? this.props.classList : ""}>
-                    {this.props.children}
-                    <div>
-                        <button type="submit" className="btn btn-primary">
-                            Add
-                        </button>
-                        <button
-                            type="button"
-                            onClick={() => this.setState({ adding: false })}
-                            className="btn btn-danger ms-2"
-                        >
-                            Cancel
-                        </button>
-                    </div>
-                </form>
-            );
-        } else {
-            return (
-                <button onClick={() => this.setState({ adding: true })} className="btn btn-primary">
-                    Add
-                </button>
-            );
-        }
+    if (adding) {
+        return (
+            <form onSubmit={(e) => onSubmit(e)} className={props.classList ? props.classList : ""}>
+                {props.children}
+                <div>
+                    <button type="submit" className="btn btn-primary">
+                        Add
+                    </button>
+                    <button type="button" onClick={() => setAdding(false)} className="btn btn-danger ms-2">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        );
+    } else {
+        return (
+            <button onClick={() => setAdding(true)} className="btn btn-primary">
+                Add
+            </button>
+        );
     }
 }
 

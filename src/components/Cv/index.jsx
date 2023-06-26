@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Component } from "react";
+import { useState } from "react";
 import EducationalExperienceSection from "../EducationalExperienceSection";
 import GeneralInfoSection from "../GeneralInfoSection";
 import PracticalExperienceSection from "../PracticalExperienceSection";
@@ -7,120 +7,90 @@ import SkillsSection from "../SkillsSection";
 
 import "./index.css";
 
-export default class Cv extends Component {
-    constructor(props) {
-        super(props);
+export default function Cv(props) {
+    const [generalInfo, setGeneralInfo] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+    });
+    const [educationalExperience, setEducationalExperience] = useState([]);
+    const [practicalExperience, setPracticalExperience] = useState([]);
+    const [skills, setSkills] = useState([]);
 
-        this.state = {
-            generalInfo: {
-                firstName: "",
-                lastName: "",
-                email: "",
-                phone: "",
-            },
-            educationalExperience: [],
-            practicalExperience: [],
-            skills: [],
-        };
-
-        this.setFirstName = this.setFirstName.bind(this);
-        this.setLastName = this.setLastName.bind(this);
-        this.setEmail = this.setEmail.bind(this);
-        this.setPhone = this.setPhone.bind(this);
-        this.addEducationalExperience = this.addEducationalExperience.bind(this);
-        this.addPracticalExperience = this.addPracticalExperience.bind(this);
-        this.addSkill = this.addSkill.bind(this);
-    }
-
-    setFirstName(value) {
-        this.setState({
-            generalInfo: {
-                ...this.state.generalInfo,
-                firstName: value,
-            },
+    function setFirstName(value) {
+        setGeneralInfo({
+            ...generalInfo,
+            firstName: value,
         });
     }
 
-    setLastName(value) {
-        this.setState({
-            generalInfo: {
-                ...this.state.generalInfo,
-                lastName: value,
-            },
+    function setLastName(value) {
+        setGeneralInfo({
+            ...generalInfo,
+            lastName: value,
         });
     }
 
-    setEmail(value) {
-        this.setState({
-            generalInfo: {
-                ...this.state.generalInfo,
-                email: value,
-            },
+    function setEmail(value) {
+        setGeneralInfo({
+            ...generalInfo,
+            email: value,
         });
     }
 
-    setPhone(value) {
-        this.setState({
-            generalInfo: {
-                ...this.state.generalInfo,
-                phone: value,
-            },
+    function setPhone(value) {
+        setGeneralInfo({
+            ...generalInfo,
+            phone: value,
         });
     }
 
-    addEducationalExperience(educationalExperience) {
-        this.setState({
-            educationalExperience: [...this.state.educationalExperience, educationalExperience],
-        });
+    function addEducationalExperience(experience) {
+        setEducationalExperience([...educationalExperience, experience]);
     }
 
-    addPracticalExperience(practicalExperience) {
-        this.setState({
-            practicalExperience: [...this.state.practicalExperience, practicalExperience],
-        });
+    function addPracticalExperience(experience) {
+        setPracticalExperience([...practicalExperience, experience]);
     }
 
-    addSkill(skill) {
-        this.setState({
-            skills: [...this.state.skills, skill],
-        });
+    function addSkill(skill) {
+        setSkills([...skills, skill]);
     }
 
-    render() {
-        return (
-            <div className="Cv vh-100 d-flex">
-                <aside className="bg-dark text-white p-5 d-flex flex-column justify-content-between">
-                    <GeneralInfoSection
-                        generalInfo={this.state.generalInfo}
-                        setFirstName={this.setFirstName}
-                        setLastName={this.setLastName}
-                        setEmail={this.setEmail}
-                        setPhone={this.setPhone}
+    return (
+        <div className="Cv vh-100 d-flex">
+            <aside className="bg-dark text-white p-5 d-flex flex-column justify-content-between">
+                <GeneralInfoSection
+                    generalInfo={generalInfo}
+                    setFirstName={setFirstName}
+                    setLastName={setLastName}
+                    setEmail={setEmail}
+                    setPhone={setPhone}
+                />
+                <button onClick={() => props.saveCV(this.state)} className="btn btn-success p-3">
+                    Save
+                </button>
+            </aside>
+            <main className="bg-light d-flex flex-column p-5">
+                <div className="flex-fill">
+                    <EducationalExperienceSection
+                        educationalExperience={educationalExperience}
+                        addEducationalExperience={addEducationalExperience}
                     />
-                    <button onClick={() => this.props.saveCV(this.state)} className="btn btn-success p-3">
-                        Save
-                    </button>
-                </aside>
-                <main className="bg-light d-flex flex-column p-5">
-                    <div className="flex-fill">
-                        <EducationalExperienceSection
-                            educationalExperience={this.state.educationalExperience}
-                            onSubmit={this.addEducationalExperience}
-                        />
-                    </div>
-                    <div className="flex-fill">
-                        <PracticalExperienceSection
-                            practicalExperience={this.state.practicalExperience}
-                            onSubmit={this.addPracticalExperience}
-                        />
-                    </div>
-                    <div className="flex-fill">
-                        <SkillsSection skills={this.state.skills} onSubmit={this.addSkill} />
-                    </div>
-                </main>
-            </div>
-        );
-    }
+                </div>
+                <div className="flex-fill">
+                    <PracticalExperienceSection
+                        practicalExperience={practicalExperience}
+                        addPracticalExperience={addPracticalExperience}
+                    />
+                </div>
+                <div className="flex-fill">
+                    <SkillsSection skills={skills} addSkill={addSkill} />
+                </div>
+            </main>
+        </div>
+    );
 }
 
 Cv.propTypes = {
