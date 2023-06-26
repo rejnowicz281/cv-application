@@ -68,12 +68,19 @@ export default function Cv(props) {
                     setEmail={setEmail}
                     setPhone={setPhone}
                 />
-                <button
-                    onClick={() => props.saveCV({ generalInfo, practicalExperience, educationalExperience, skills })}
-                    className="btn btn-success p-3"
-                >
-                    Save
-                </button>
+                <div className="d-flex flex-column gap-3">
+                    <button onClick={props.showCvList} className="btn btn-info p-2">
+                        Show CV List ({props.cvListLength})
+                    </button>
+                    <button
+                        onClick={() =>
+                            props.saveCV({ generalInfo, practicalExperience, educationalExperience, skills })
+                        }
+                        className="btn btn-success p-3"
+                    >
+                        Save
+                    </button>
+                </div>
             </aside>
             <main className="bg-light d-flex flex-column p-5">
                 <div className="flex-fill">
@@ -97,5 +104,7 @@ export default function Cv(props) {
 }
 
 Cv.propTypes = {
+    cvListLength: PropTypes.number.isRequired,
+    showCvList: PropTypes.func.isRequired,
     saveCV: PropTypes.func.isRequired,
 };
