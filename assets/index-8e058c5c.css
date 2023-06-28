@@ -1,4 +1,4 @@
-@charset "UTF-8";input.EditableInput{border:none;outline:none;border-radius:10px;background-color:#342e2e;color:#fff;text-decoration:dashed;width:100%}.EditableInput{transition:.1s}.EditableInput#first-name,.EditableInput#last-name{font-size:40px}.EditableInput:hover,input.EditableInput{font-size:1.1em;font-weight:700}.contact *{padding-top:10px;padding-bottom:10px}.Cv>aside{flex:1}.Cv>main{flex:4.5}/*!
+@charset "UTF-8";input.EditableInput{border:none;outline:none;border-radius:10px;background-color:#342e2e;color:#fff;text-decoration:dashed;width:100%}.EditableInput{transition:.1s}.EditableInput#first-name,.EditableInput#last-name{font-size:40px}.EditableInput:hover,input.EditableInput{font-size:1.1em;font-weight:700}.contact *{padding-top:10px;padding-bottom:10px}.Cv>aside{flex:1}.Cv>main{flex:4.5}.cv-list-container>.list-group-item:hover{color:red}/*!
  * Bootstrap  v5.3.0 (https://getbootstrap.com/)
  * Copyright 2011-2023 The Bootstrap Authors
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
