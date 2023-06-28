@@ -8,37 +8,42 @@ export default function CvList({ list }) {
 
     return (
         <div className="CvList">
-            <div className="text-center">
-                <h1>Cv List</h1>
-                <Link className="btn btn-primary me-2" to="/cv-application/new">
-                    Create New Cv
-                </Link>
-                {savedCv && (
-                    <Link className="btn btn-primary ms-2" to="/cv-application/new" state={{ cvInfo: savedCv }}>
-                        Back to ({savedCv.generalInfo.firstName}, {savedCv.generalInfo.lastName})
+            <div className="bg-dark text-white pb-5 pt-3">
+                <h1 className="text-center">CV List</h1>
+                <div className="d-flex flex-column align-items-center gap-3">
+                    <Link className="btn btn-success me-2 fs-3" to="/cv-application/new">
+                        Create New Cv
                     </Link>
-                )}
-                <div className="list-group cv-list-container mt-3">
-                    {list.map((cv) => {
-                        return (
-                            <Link
-                                key={cv.id}
-                                to={`/cv-application/edit/${cv.id}`}
-                                state={{
-                                    cvInfo: {
-                                        generalInfo: cv.generalInfo,
-                                        practicalExperience: cv.practicalExperience,
-                                        educationalExperience: cv.educationalExperience,
-                                        skills: cv.skills,
-                                    },
-                                }}
-                                className="list-group-item"
-                            >
-                                {cv.generalInfo.firstName}, {cv.generalInfo.lastName}
-                            </Link>
-                        );
-                    })}
+                    {savedCv && (
+                        <Link className="btn btn-info ms-2" to="/cv-application/new" state={{ cvInfo: savedCv }}>
+                            Back to
+                            {savedCv.generalInfo.firstName && savedCv.generalInfo.lastName
+                                ? ` (${savedCv.generalInfo.firstName}, ${savedCv.generalInfo.lastName})`
+                                : " CV"}
+                        </Link>
+                    )}
                 </div>
+            </div>
+            <div className="list-group text-center cv-list-container fs-4 mt-3">
+                {list.map((cv) => {
+                    return (
+                        <Link
+                            key={cv.id}
+                            to={`/cv-application/edit/${cv.id}`}
+                            state={{
+                                cvInfo: {
+                                    generalInfo: cv.generalInfo,
+                                    practicalExperience: cv.practicalExperience,
+                                    educationalExperience: cv.educationalExperience,
+                                    skills: cv.skills,
+                                },
+                            }}
+                            className="list-group-item"
+                        >
+                            {cv.generalInfo.firstName}, {cv.generalInfo.lastName}
+                        </Link>
+                    );
+                })}
             </div>
         </div>
     );
