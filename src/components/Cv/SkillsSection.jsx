@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { skillsPropType } from "../../propTypes/cvPropType";
-import ToggableForm from "../ToggableForm";
+import ToggableForm from "./ToggableForm";
 
 export default function SkillsSection({ addSkill, skills }) {
     const [newEntry, setNewEntry] = useState("");

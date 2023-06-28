@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { generalInfoPropType } from "../../propTypes/cvPropType";
-import EditableInput from "../EditableInput";
+import EditableInput from "./EditableInput";
 import "./index.css";
 export default function GeneralInfoSection({ generalInfo, setFirstName, setLastName, setEmail, setPhone }) {
     return (

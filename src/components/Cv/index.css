@@ -5,3 +5,33 @@
 .Cv > main {
     flex: 4.5;
 }
+
+.contact * {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+input.EditableInput {
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background-color: rgb(52, 46, 46);
+    color: white;
+    text-decoration: dashed;
+    width: 100%;
+}
+
+.EditableInput {
+    transition: 0.1s;
+}
+
+.EditableInput#first-name,
+.EditableInput#last-name {
+    font-size: 40px;
+}
+
+.EditableInput:hover,
+input.EditableInput {
+    font-size: 1.1em;
+    font-weight: bold;
+}

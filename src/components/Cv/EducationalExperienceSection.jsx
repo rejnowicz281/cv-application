@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { educationalExperiencePropType } from "../../propTypes/cvPropType";
-import ToggableForm from "../ToggableForm";
+import ToggableForm from "./ToggableForm";
 
 {
     /* School name, title of study, date of study */

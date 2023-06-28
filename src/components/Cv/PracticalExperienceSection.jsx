@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { practicalExperiencePropType } from "../../propTypes/cvPropType";
-import ToggableForm from "../ToggableForm";
+import ToggableForm from "./ToggableForm";
 {
     /* Company name, position title, main tasks, date (from-to) of working */
 }

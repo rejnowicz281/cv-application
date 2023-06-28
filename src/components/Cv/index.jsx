@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import EducationalExperienceSection from "../EducationalExperienceSection";
-import GeneralInfoSection from "../GeneralInfoSection";
-import PracticalExperienceSection from "../PracticalExperienceSection";
-import SkillsSection from "../SkillsSection";
+import EducationalExperienceSection from "./EducationalExperienceSection";
+import GeneralInfoSection from "./GeneralInfoSection";
+import PracticalExperienceSection from "./PracticalExperienceSection";
+import SkillsSection from "./SkillsSection";
 
 import "./index.css";
 
