@@ -7,11 +7,11 @@ import "./index.css";
 
 export default function CvList({ list }) {
     const location = useLocation();
-    const savedCv = location.state && location.state.savedCv;
+    const fallbackCv = location.state && location.state.fallbackCv;
 
     return (
         <div className="CvList">
-            <CvListHeader savedCv={savedCv} />
+            <CvListHeader fallbackCv={fallbackCv} />
             <CvListMain list={list} />
         </div>
     );

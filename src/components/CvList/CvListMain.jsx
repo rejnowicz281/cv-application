@@ -4,11 +4,11 @@ import CvListLink from "./CvListLink";
 
 export default function CvListMain({ list }) {
     return (
-        <div className="CvListMain list-group text-center fs-4 mt-3">
+        <main className="CvListMain list-group text-center fs-4 mt-3">
             {list.map((cv) => {
                 return <CvListLink key={cv.id} cv={cv} />;
             })}
-        </div>
+        </main>
     );
 }
 

@@ -39,11 +39,11 @@ export default function App() {
     }
 
     function editCv(id, newCv) {
-        const newList = list.map((item) => {
-            if (item.id === id) {
-                return { ...item, ...newCv };
+        const newList = list.map((originalCv) => {
+            if (originalCv.id === id) {
+                return { ...originalCv, ...newCv };
             }
-            return item;
+            return originalCv;
         });
         setList(newList);
     }

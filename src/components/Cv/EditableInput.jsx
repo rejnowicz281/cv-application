@@ -1,10 +1,6 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
-import "./index.css";
 
-{
-    /* ✔ ❌ */
-}
 export default function EditableInput({ value, type, id, onChange, placeholder }) {
     const [editing, setEditing] = useState(false);
 

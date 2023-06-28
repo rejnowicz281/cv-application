@@ -1,11 +1,8 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import EducationalExperienceSection from "./EducationalExperienceSection";
-import GeneralInfoSection from "./GeneralInfoSection";
-import PracticalExperienceSection from "./PracticalExperienceSection";
-import SkillsSection from "./SkillsSection";
-
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import CvAside from "./CvAside";
+import CvMain from "./CvMain";
 import "./index.css";
 
 export default function Cv({ onSave, listLength }) {
@@ -86,48 +83,25 @@ export default function Cv({ onSave, listLength }) {
 
     return (
         <div className="Cv vh-100 d-flex">
-            <aside className="bg-dark text-white p-5 d-flex flex-column justify-content-between">
-                <GeneralInfoSection
-                    generalInfo={generalInfo}
-                    setFirstName={setFirstName}
-                    setLastName={setLastName}
-                    setEmail={setEmail}
-                    setPhone={setPhone}
-                />
-                <div className="d-flex flex-column gap-3">
-                    <Link
-                        className="btn btn-info p-2"
-                        to="/cv-application/list"
-                        state={
-                            id == null && {
-                                savedCv: { generalInfo, practicalExperience, educationalExperience, skills },
-                            }
-                        }
-                    >
-                        Show Cv List ({listLength})
-                    </Link>
-                    <button onClick={handleSave} className="btn btn-success p-3">
-                        Save
-                    </button>
-                </div>
-            </aside>
-            <main className="bg-light d-flex flex-column p-5">
-                <div className="flex-fill">
-                    <EducationalExperienceSection
-                        educationalExperience={educationalExperience}
-                        addEducationalExperience={addEducationalExperience}
-                    />
-                </div>
-                <div className="flex-fill">
-                    <PracticalExperienceSection
-                        practicalExperience={practicalExperience}
-                        addPracticalExperience={addPracticalExperience}
-                    />
-                </div>
-                <div className="flex-fill">
-                    <SkillsSection skills={skills} addSkill={addSkill} />
-                </div>
-            </main>
+            <CvAside
+                generalInfo={generalInfo}
+                setFirstName={setFirstName}
+                setLastName={setLastName}
+                setEmail={setEmail}
+                setPhone={setPhone}
+                listLength={listLength}
+                cvId={id}
+                handleSave={handleSave}
+                fallbackCv={{ generalInfo, practicalExperience, educationalExperience, skills }}
+            />
+            <CvMain
+                educationalExperience={educationalExperience}
+                addEducationalExperience={addEducationalExperience}
+                practicalExperience={practicalExperience}
+                addPracticalExperience={addPracticalExperience}
+                skills={skills}
+                addSkill={addSkill}
+            />
         </div>
     );
 }

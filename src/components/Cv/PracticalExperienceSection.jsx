@@ -2,9 +2,7 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { practicalExperiencePropType } from "../../propTypes/cvPropType";
 import ToggableForm from "./ToggableForm";
-{
-    /* Company name, position title, main tasks, date (from-to) of working */
-}
+
 export default function PracticalExperienceSection({ addPracticalExperience, practicalExperience }) {
     const [newEntry, setNewEntry] = useState({
         companyName: "",
@@ -14,7 +12,6 @@ export default function PracticalExperienceSection({ addPracticalExperience, pra
         dateTo: "",
     });
 
-    // Turn these functions into one?
     function setCompanyName(value) {
         setNewEntry({
             ...newEntry,
