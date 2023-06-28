@@ -40,7 +40,13 @@ export default function CvList({ list }) {
                             }}
                             className="list-group-item"
                         >
-                            {cv.generalInfo.firstName}, {cv.generalInfo.lastName}
+                            {cv.generalInfo.firstName && cv.generalInfo.lastName ? (
+                                <span>
+                                    {cv.generalInfo.firstName}, {cv.generalInfo.lastName}
+                                </span>
+                            ) : (
+                                <b>~{cv.id}~</b>
+                            )}
                         </Link>
                     );
                 })}
