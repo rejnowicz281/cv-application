@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { practicalExperiencePropType } from "../../propTypes/cvPropType";
 import ToggableForm from "../ToggableForm";
 {
     /* Company name, position title, main tasks, date (from-to) of working */
 }
-export default function PracticalExperienceSection(props) {
+export default function PracticalExperienceSection({ addPracticalExperience, practicalExperience }) {
     const [newEntry, setNewEntry] = useState({
         companyName: "",
         positionTitle: "",
@@ -50,7 +51,7 @@ export default function PracticalExperienceSection(props) {
     }
 
     function onSubmit() {
-        props.addPracticalExperience(newEntry);
+        addPracticalExperience(newEntry);
         setNewEntry({ companyName: "", positionTitle: "", mainTasks: "", dateFrom: "", dateTo: "" });
     }
 
@@ -58,7 +59,7 @@ export default function PracticalExperienceSection(props) {
         <section className="PracticalExperienceSection">
             <h1>Practical Experience</h1>
             <ul>
-                {props.practicalExperience.map((exp, idx) => {
+                {practicalExperience.map((exp, idx) => {
                     return (
                         <li key={idx}>
                             {exp.companyName} - {exp.positionTitle} - {exp.mainTasks} - {exp.dateFrom} - {exp.dateTo}
@@ -116,13 +117,5 @@ export default function PracticalExperienceSection(props) {
 
 PracticalExperienceSection.propTypes = {
     addPracticalExperience: PropTypes.func.isRequired,
-    practicalExperience: PropTypes.arrayOf(
-        PropTypes.shape({
-            companyName: PropTypes.string.isRequired,
-            positionTitle: PropTypes.string.isRequired,
-            mainTasks: PropTypes.string.isRequired,
-            dateFrom: PropTypes.string.isRequired,
-            dateTo: PropTypes.string.isRequired,
-        })
-    ),
+    practicalExperience: practicalExperiencePropType.isRequired,
 };

@@ -1,19 +1,19 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-export default function ToggableForm(props) {
+export default function ToggableForm({ classList, children, onSubmit }) {
     const [adding, setAdding] = useState(false);
 
-    function onSubmit(e) {
+    function handleSubmit(e) {
         e.preventDefault();
         setAdding(false);
-        props.onSubmit();
+        onSubmit();
     }
 
     if (adding) {
         return (
-            <form onSubmit={(e) => onSubmit(e)} className={props.classList ? props.classList : ""}>
-                {props.children}
+            <form onSubmit={(e) => handleSubmit(e)} className={classList ? classList : ""}>
+                {children}
                 <div>
                     <button type="submit" className="btn btn-primary">
                         Add

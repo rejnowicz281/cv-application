@@ -1,11 +1,12 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { educationalExperiencePropType } from "../../propTypes/cvPropType";
 import ToggableForm from "../ToggableForm";
 
 {
     /* School name, title of study, date of study */
 }
-export default function EducationalExperienceSection(props) {
+export default function EducationalExperienceSection({ addEducationalExperience, educationalExperience }) {
     const [newEntry, setNewEntry] = useState({ schoolName: "", titleOfStudy: "", dateOfStudy: "" });
 
     function setSchoolName(value) {
@@ -30,7 +31,7 @@ export default function EducationalExperienceSection(props) {
     }
 
     function onSubmit() {
-        props.addEducationalExperience(newEntry);
+        addEducationalExperience(newEntry);
         setNewEntry({ schoolName: "", titleOfStudy: "", dateOfStudy: "" });
     }
 
@@ -38,7 +39,7 @@ export default function EducationalExperienceSection(props) {
         <section className="EducationalExperienceSection">
             <h1>Educational Experience</h1>
             <ul>
-                {props.educationalExperience.map((exp, idx) => {
+                {educationalExperience.map((exp, idx) => {
                     return (
                         <li key={idx}>
                             {exp.schoolName} - {exp.titleOfStudy} - {exp.dateOfStudy}
@@ -83,11 +84,5 @@ export default function EducationalExperienceSection(props) {
 
 EducationalExperienceSection.propTypes = {
     addEducationalExperience: PropTypes.func.isRequired,
-    educationalExperience: PropTypes.arrayOf(
-        PropTypes.shape({
-            schoolName: PropTypes.string.isRequired,
-            titleOfStudy: PropTypes.string.isRequired,
-            dateOfStudy: PropTypes.string.isRequired,
-        })
-    ),
+    educationalExperience: educationalExperiencePropType.isRequired,
 };

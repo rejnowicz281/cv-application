@@ -1,12 +1,13 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { skillsPropType } from "../../propTypes/cvPropType";
 import ToggableForm from "../ToggableForm";
 
-export default function SkillsSection(props) {
+export default function SkillsSection({ addSkill, skills }) {
     const [newEntry, setNewEntry] = useState("");
 
     function onSubmit() {
-        props.addSkill(newEntry);
+        addSkill(newEntry);
         setNewEntry("");
     }
 
@@ -14,7 +15,7 @@ export default function SkillsSection(props) {
         <section className="SkillsSection">
             <h1>Skills</h1>
             <ul>
-                {props.skills.map((skill, idx) => {
+                {skills.map((skill, idx) => {
                     return <li key={idx}>{skill}</li>;
                 })}
             </ul>
@@ -27,5 +28,5 @@ export default function SkillsSection(props) {
 
 SkillsSection.propTypes = {
     addSkill: PropTypes.func.isRequired,
-    skills: PropTypes.arrayOf(PropTypes.string).isRequired,
+    skills: skillsPropType.isRequired,
 };

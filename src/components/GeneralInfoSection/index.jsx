@@ -1,38 +1,38 @@
 import PropTypes from "prop-types";
+import { generalInfoPropType } from "../../propTypes/cvPropType";
 import EditableInput from "../EditableInput";
 import "./index.css";
-
-export default function GeneralInfoSection(props) {
+export default function GeneralInfoSection({ generalInfo, setFirstName, setLastName, setEmail, setPhone }) {
     return (
         <section className="GeneralInfoSection">
             <EditableInput
-                onChange={props.setFirstName}
+                onChange={setFirstName}
                 id="first-name"
                 type="text"
-                value={props.generalInfo.firstName}
+                value={generalInfo.firstName}
                 placeholder="First Name"
             />
             <EditableInput
-                onChange={props.setLastName}
+                onChange={setLastName}
                 id="last-name"
                 type="text"
-                value={props.generalInfo.lastName}
+                value={generalInfo.lastName}
                 placeholder="Last Name"
             />
             <p className="fs-4 mt-5 pb-1 border-bottom">Contact</p>
             <div className="contact">
                 <EditableInput
-                    onChange={props.setEmail}
+                    onChange={setEmail}
                     id="email"
                     type="email"
-                    value={props.generalInfo.email}
+                    value={generalInfo.email}
                     placeholder="Email"
                 />
                 <EditableInput
-                    onChange={props.setPhone}
+                    onChange={setPhone}
                     id="phone"
                     type="tel"
-                    value={props.generalInfo.phone}
+                    value={generalInfo.phone}
                     placeholder="Phone"
                 />
             </div>
@@ -41,12 +41,7 @@ export default function GeneralInfoSection(props) {
 }
 
 GeneralInfoSection.propTypes = {
-    generalInfo: PropTypes.shape({
-        firstName: PropTypes.string.isRequired,
-        lastName: PropTypes.string.isRequired,
-        email: PropTypes.string.isRequired,
-        phone: PropTypes.string.isRequired,
-    }),
+    generalInfo: generalInfoPropType.isRequired,
     setFirstName: PropTypes.func.isRequired,
     setLastName: PropTypes.func.isRequired,
     setEmail: PropTypes.func.isRequired,

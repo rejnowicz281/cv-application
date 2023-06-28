@@ -5,12 +5,12 @@ import "./index.css";
 {
     /* ✔ ❌ */
 }
-export default function EditableInput(props) {
+export default function EditableInput({ value, type, id, onChange, placeholder }) {
     const [editing, setEditing] = useState(false);
 
     useEffect(() => {
         const disableEditingOnClick = (e) => {
-            if (e.target.id !== props.id) {
+            if (e.target.id !== id) {
                 setEditing(false);
             }
         };
@@ -28,23 +28,23 @@ export default function EditableInput(props) {
             document.removeEventListener("click", disableEditingOnClick);
             document.removeEventListener("keydown", disableEditingOnEnter);
         };
-    }, [props.id]);
+    }, [id]);
 
     if (editing) {
         return (
             <input
-                onChange={(e) => props.onChange(e.target.value)}
-                type={props.type}
+                onChange={(e) => onChange(e.target.value)}
+                type={type}
                 className="EditableInput"
-                id={props.id}
-                value={props.value}
-                placeholder={props.placeholder}
+                id={id}
+                value={value}
+                placeholder={placeholder}
             />
         );
     } else {
         return (
-            <div onClick={() => setEditing(true)} className="EditableInput" id={props.id}>
-                {props.value == "" ? props.placeholder : props.value}
+            <div onClick={() => setEditing(true)} className="EditableInput" id={id}>
+                {value == "" ? placeholder : value}
             </div>
         );
     }
